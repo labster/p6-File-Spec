@@ -143,7 +143,6 @@ is $Unix.abs2rel('/t1/t2/t4','/t1/t2/t3'),    '../t4',              "abs2rel: ('
 is $Unix.abs2rel('/t1/t2','/t1/t2/t3'),       '..',                 "abs2rel: ('/t1/t2','/t1/t2/t3') -> '..'";
 is $Unix.abs2rel('/t1/t2/t3/t4','/t1/t2/t3'), 't4',                 "abs2rel: ('/t1/t2/t3/t4','/t1/t2/t3') -> 't4'";
 is $Unix.abs2rel('/t4/t5/t6','/t1/t2/t3'),    '../../../t4/t5/t6',  "abs2rel: ('/t4/t5/t6','/t1/t2/t3') -> '../../../t4/t5/t6'";
-#[ "Unix->abs2rel('../t4','/t1/t2/t3'),             '../t4',              "abs2rel: ('../t4','/t1/t2/t3') -> '../t4'";
 is $Unix.abs2rel('/','/t1/t2/t3'),            '../../..',           "abs2rel: ('/','/t1/t2/t3') -> '../../..'";
 is $Unix.abs2rel('///','/t1/t2/t3'),          '../../..',           "abs2rel: ('///','/t1/t2/t3') -> '../../..'";
 is $Unix.abs2rel('/.','/t1/t2/t3'),           '../../..',           "abs2rel: ('/.','/t1/t2/t3') -> '../../..'";
@@ -165,7 +164,7 @@ if $*OS ~~ any(<MacOS MSWin32 os2 VMS epoc NetWare symbian dos cygwin>) {
 	skip_rest 'Unix on-platform tests'
 }
 else {
-	is File::Spec.MODULE, "File::Spec::Unix", "unix: loads correct module";
+	isa_ok File::Spec.MODULE, File::Spec::Unix, "unix: loads correct module";
 	is File::Spec.rel2abs( File::Spec.curdir ), $*CWD, "rel2abs: \$*CWD test";
 	ok {.IO.d && .IO.w}.(File::Spec.tmpdir), "tmpdir: {File::Spec.tmpdir} is a writable directory";
 }
