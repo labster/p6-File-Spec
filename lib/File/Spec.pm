@@ -10,6 +10,8 @@ my $module = "File::Spec::" ~ (%module{$*OS} // 'Unix');
 require ::($module);
 my $CLASS := ::($module);
 
+method FSTYPE ($OS = $*OS) { %module{$OS} // 'Unix' }
+
 #| Dispatches methods to the appropriate class for the current $*OS
 method MODULE handles
 	<canonpath curdir updir rootdir devnull tmpdir
